@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  title: FCCS Module Extractor
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+  /module/{module_id}:
+    get:
+      summary: Extraire le contenu de cours d’un module FCCS
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Code du module (ex : TH-CIRI, TH-COTI…)
+      responses:
+        '200':
+          description: Contenu du cours extrait
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  module:
+                    type: string
+                  contenu:
+                    type: string
+        '404':
+          description: Module non trouvé
